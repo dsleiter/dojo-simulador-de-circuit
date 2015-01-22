@@ -1,39 +1,38 @@
-﻿namespace CircuitSimulatorDojo {
-    class HalfAdder : Gate {
-        private OrGate _or;
-        private AndGate _and1;
-        private AndGate _and2;
-        private NotGate _not;
-
+﻿
+namespace CircuitSimulatorDojo {
+    class HalfAdder {
         public HalfAdder() {
-            _or = new OrGate();
+            A = new Wire();
+            B = new Wire();
             _and1 = new AndGate();
             _and2 = new AndGate();
-            _not = new NotGate();
+            _or1 = new OrGate();
+            _not1 = new NotGate();
+
+            A.ConnectTo(_and1.In1);
+            A.ConnectTo(_or1.In1);
+            B.ConnectTo(_and1.In2);
+            B.ConnectTo(_or1.In2);
+
+            _or1.Out.ConnectTo(_and2.In1);
+            _and1.Out.ConnectTo(_not1.In);
+            _not1.Out.ConnectTo(_and2.In2);
         }
 
-        public override bool Out {
-            get {
-                Compute();
-                return _and2.Out;
-            }
+        private readonly AndGate _and1;
+        private readonly AndGate _and2;
+        private readonly OrGate _or1;
+        private readonly NotGate _not1;
+
+        public IConnector A { get; private set; }
+        public IConnector B { get; private set; }
+
+        public IConnector S {
+            get { return _and2.Out; }
         }
 
-        public bool Carry {
-            get {
-                Compute();
-                return _and1.Out;
-            }
-        }
-
-        private void Compute() {
-            _not.InA = _and1;
-            _and2.InA = _or;
-            _and2.InB = _not;
-            _or.InA = InA;
-            _and1.InA = InA;
-            _or.InB = InB;
-            _and1.InB = InB;
+        public IConnector C {
+            get { return _and1.Out; }
         }
     }
 }

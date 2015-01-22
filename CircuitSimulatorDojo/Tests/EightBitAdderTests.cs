@@ -1,4 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace CircuitSimulatorDojo.Tests {
     class EightBitAdderTests {
@@ -14,8 +20,8 @@ namespace CircuitSimulatorDojo.Tests {
 
         [TestCase(1, 2, ExpectedResult = false)]
         [TestCase(128, 127, ExpectedResult = false)]
-        [TestCase(254, 1, ExpectedResult = false)]
         [TestCase(128, 128, ExpectedResult = true)]
+        [TestCase(254, 1, ExpectedResult = false)]
         [TestCase(248, 15, ExpectedResult = true)]
         public bool Overflow_deve_funcionar(byte a, byte b) {
             var adder = new EightBitAdder();

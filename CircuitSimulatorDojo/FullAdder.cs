@@ -1,40 +1,43 @@
-﻿
-namespace CircuitSimulatorDojo {
-    public class FullAdder : Gate {
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-        private HalfAdder _halfAdder1;
-        private HalfAdder _halfAdder2;
-        private OrGate _or;
+namespace CircuitSimulatorDojo {
+    class FullAdder {
+        private readonly HalfAdder _half1;
+        private readonly HalfAdder _half2;
+        private readonly OrGate _or1;
 
         public FullAdder() {
-            _halfAdder1 = new HalfAdder();
-            _halfAdder2 = new HalfAdder();
-            _or = new OrGate();
+            _half1 = new HalfAdder();
+            _half2 = new HalfAdder();
+            _or1 = new OrGate();
+
+            _half1.S.ConnectTo(_half2.A);
+            _half1.C.ConnectTo(_or1.In2);
+            _half2.C.ConnectTo(_or1.In1);
         }
 
-        public override bool Out {
-            get {
-                Compute();
-                return _halfAdder2.Out;
-            }
+        public IConnector A {
+            get { return _half1.A; }
         }
 
-        public bool Carry {
-            get {
-                Compute();
-                return _or.Out;
-            }
+        public IConnector B {
+            get { return _half1.B; }
         }
 
-        public Gate InC { get; set; }
+        public IConnector C {
+            get { return _half2.B; }
+        }
 
-        private void Compute() {
-            _halfAdder2.InA = _halfAdder1;
-            _halfAdder2.InB = InC;
-            _halfAdder1.InA = InA;
-            _halfAdder1.InB = InB;
-            _or.InA = new Terminal(_halfAdder2.Carry);
-            _or.InB = new Terminal(_halfAdder1.Carry);
+        public IConnector Sum {
+            get { return _half2.S; }
+        }
+
+        public IConnector Carry {
+            get { return _or1.Out; }
         }
     }
 }

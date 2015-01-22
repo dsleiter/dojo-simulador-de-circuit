@@ -50,21 +50,18 @@
     <Compile Include="AndGate.cs" />
     <Compile Include="EightBitAdder.cs" />
     <Compile Include="FullAdder.cs" />
-    <Compile Include="Gate.cs" />
     <Compile Include="HalfAdder.cs" />
+    <Compile Include="IConnector.cs" />
     <Compile Include="NotGate.cs" />
     <Compile Include="OrGate.cs" />
-    <Compile Include="PontoDeConexao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Terminal.cs" />
     <Compile Include="Tests\AndGateTests.cs" />
     <Compile Include="Tests\EightBitAdderTests.cs" />
     <Compile Include="Tests\FullAdderTests.cs" />
     <Compile Include="Tests\HalfAdderTests.cs" />
     <Compile Include="Tests\NotGateTest.cs" />
     <Compile Include="Tests\OrGateTests.cs" />
-    <Compile Include="Tests\TerminalTests.cs" />
     <Compile Include="Tests\WireTests.cs" />
     <Compile Include="Wire.cs" />
   </ItemGroup>
